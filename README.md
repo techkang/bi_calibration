@@ -29,5 +29,5 @@
 其中，count 是可选参数，默认为 01,表示对 left 文件夹中 left01.jpg 图像进行标定。
 ### 运行结果
 以 left01.jpg 为例，原图和修正后的图像如下：
-![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/left/left01.png)
+![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/left/left01.jpg)
 ![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/calibresult/left01.png)
