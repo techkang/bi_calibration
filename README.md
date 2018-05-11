@@ -1,9 +1,9 @@
-# 普通相机图像测距代码
-运行本仓库代码需要先安装相关包：
+# 普通相机图像测距
+代码运行环境： `Python 3.6.3`  
+下载本仓库并安装相关包：
 
     git clone https://github.com/techkang/postgraduate
     cd postgraduate
-    mkdir calibresult
     pip3 install -r requirements.txt
 ## 文件目录
 ├── result（存放相关结果）     
