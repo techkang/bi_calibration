@@ -38,6 +38,6 @@
     python3 stereo_calibration.py [file]
 其中，file 是可选参数，默认为 01,表示对 left 文件夹中 left01.jpg 图像和 right 文件夹中的 right01.jpg 图像进行标定。可以指定其他值对left和right文件夹中的图片进行标定（注意0不能省略）。
 ### 运行结果
-程序未能按照预期输出，输出的照片明显发生旋转。以 left01 和 right01 为例，输出结果如图所示：
-![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/left01.jpg)
+运行程序，输出对指定图片双目标定的结果，同时将结果保存在`result/stereo_calibresult/`文件夹下。本节代码未能按照预期的结果运行，输出照片发生了明显的旋转。以 left01.jpg 和 right01.jpg 为例，输出结果如图所示：
+![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/left01.png)
 ![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/right01.png)

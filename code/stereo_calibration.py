@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import fire
 
 
-def calibration(des='12'):
+def calibration(des='01'):
     # termination criteria
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
@@ -164,7 +164,6 @@ def calibration(des='12'):
     # crop the image
     x, y, w, h = roi
     dst = dst[y:y + h, x:x + w]
-    cv2.imwrite('../result/stereo_calibresult/left' + str(des) + '.png', dst)
 
     ret, mtx_r, dist_r, rvecs, tvecs = cv2.calibrateCamera(objpoints_r,
                                                            imgpoints_r,
@@ -180,7 +179,6 @@ def calibration(des='12'):
     # crop the image
     x, y, w, h = roi
     dst_r = dst_r[y:y + h, x:x + w]
-    cv2.imwrite('../result/stereo_calibresult/right' + str(des) + '.png', dst_r)
 
     newcameramtx=mtx.copy()
     newcameramtx_r=mtx_r.copy()
@@ -210,7 +208,9 @@ def calibration(des='12'):
     gray_r = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     des_l = cv2.remap(gray, left_map1, left_map2, cv2.INTER_LINEAR)
+    cv2.imwrite('../result/stereo_calibresult/left' + str(des) + '.png', des_l)
     des_r = cv2.remap(gray_r, right_map1, right_map2, cv2.INTER_LINEAR)
+    cv2.imwrite('../result/stereo_calibresult/right' + str(des) + '.png', des_r)
 
     plt.subplot(121)
     plt.title('left')
