@@ -5,7 +5,7 @@
     git clone https://github.com/techkang/postgraduate
     cd postgraduate
     pip3 install -r requirements.txt
-## 文件目录
+## 1.文件目录
 ├── result（存放相关结果）     
 │   └── ...  
 ├── code  （代码）  
@@ -21,13 +21,23 @@
 │   └── right14.jpg  
 └── requirements.txt
 
-## 相机标定
+## 2.单目相机标定
 ### 运行代码
 
 	cd code
-	python3 calibration.py [count]
-其中，count 是可选参数，默认为 01,表示对 left 文件夹中 left01.jpg 图像进行标定。
+	python3 calibration.py [file]
+其中，file 是可选参数，默认为 01,表示对 left 文件夹中 left01.jpg 图像进行标定。可以指定其他值对left文件夹中的图片进行标定（注意0不能省略）。
 ### 运行结果
 以 left01.jpg 为例，原图和修正后的图像如下：
 ![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/left/left01.jpg)
 ![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/calibresult/left01.png)
+## 3.双目相机标定
+### 运行代码
+
+	cd code
+    python3 stereo_calibration.py [file]
+其中，file 是可选参数，默认为 01,表示对 left 文件夹中 left01.jpg 图像和 right 文件夹中的 right01.jpg 图像进行标定。可以指定其他值对left和right文件夹中的图片进行标定（注意0不能省略）。
+### 运行结果
+程序未能按照预期输出，输出的照片明显发生旋转。以 left01 和 right01 为例，输出结果如图所示：
+![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/left01.jpg)
+![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/right01.png)
