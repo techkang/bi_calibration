@@ -39,5 +39,15 @@
 其中，file 是可选参数，默认为 01,表示对 left 文件夹中 left01.jpg 图像和 right 文件夹中的 right01.jpg 图像进行标定。可以指定其他值对left和right文件夹中的图片进行标定（注意0不能省略）。
 ### 运行结果
 运行程序，输出对指定图片双目标定的结果，同时将结果保存在`result/stereo_calibresult/`文件夹下。本节代码未能按照预期的结果运行，输出照片发生了明显的旋转。以 left01.jpg 和 right01.jpg 为例，输出结果如图所示：
-![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/left01.png)
-![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/right01.png)
+![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/calibrated.png)
+
+经过分析，发现 OpenCV 一般不能很好的标定双目图像，故使用 MATLAB 先标定图像，例如 left01 和 right01 的 R (旋转矩阵)和 T (平移矩阵)如下：
+
+ |R ||T|
+ :--:|:--:|:--:|:--:|
+ 1|-0.0032|-0.0057|-83.0973
+ 0.0033|0.9999|0.0096|1.0605
+ 0.0057|-0.0097|0.9999|0.0392
+ 在程序中修改代码，手动指定 R 和 T 的值，运行程序，输出校正后的图像如下：
+ ![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/matlab-calib.png)
+ 
