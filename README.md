@@ -9,7 +9,10 @@
 ├── result（存放相关结果）     
 │   └── ...  
 ├── code  （代码）  
-│   └── calibration.py  （图像标定）  
+│   ├── calibration.py  (单目标定、校正）
+│   ├── draw.py  （推导视差公式时绘图的代码）
+│   ├── main.py  （单、双目标定、校正及测距）
+│   └── stereo_calibration.py  （双目标定、校正）
 ├── left  （测试图片）  
 │   ├── left01.jpg  
 │   ├── ...  
@@ -53,3 +56,30 @@
  在程序中修改代码，手动指定 R 和 T 的值，运行程序，输出校正后的图像如下：
  ![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/stereo_calibresult/matlab-calib.png)
  
+## 4.视差测距
+本函数可以同时实现单目标定、双目标定和校正，以及测距。
+### 运行代码
+
+	cd code
+    python3 mian.py [--key=value]
+其中，`[--key=value]`是可选参数，可选择的值、含义及其默认值如下：
+
+	sample = '01'  # 测试图片
+    disp_calib = False  # 是否展示单目校正结果
+    stereo_calib = True  # 是否进行双目校正
+    disp_stereo_calib = False  # 是否展示双目校正结果
+    disparity = True  # 是否利用视差估算距离
+    R = dict({'01': np.array([[1, -0.0032, -0.005], [0.0033, 0.9999, 0.0096],
+                              [0.0057, -0.0097, 0.9999]])})  # 由 MATLAB 标定的旋转矩阵
+    T = dict({'01': np.array([-83.0973, 1.0605, 0.0392])})  # 由 MATLAB 标定的平移矩阵
+    matlab = True  # 在双目校正时是否使用 matlab 标定的值
+    num = 3  # StereoSGBM_create 函数参数：最小可能的差异值
+    blockSize = 5  # StereoSGBM_create 函数参数：匹配的块大小。
+
+例如，输入命令`python3 main.py --disp_calib=True`，可以在测距的同时，还会输出单目测距的结果。如果保持默认值，则会对 left01 和 right01 图像进行测距，不输出单目校正和双目校正的结果，使用由 MATLAB 标定的旋转矩阵和平移矩阵。
+### 运行结果
+按照默认参数，输出结果如图：
+
+ ![Alt](https://raw.githubusercontent.com/techkang/postgraduate/master/result/disparity/ranging.png)
+ 
+ 点击左图，可以在命令行中输出该点的深度，然而，无论是从输出结果，还是右边的视差图，都离预期结果相差较远。点击左图时发现，经常有些点为负值。右图视差图中，标定板的视差应该相近，为一个平滑的渐变颜色，然而视差图没有体现出这一点。
